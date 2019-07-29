@@ -1,0 +1,42 @@
+#matrix {
+	display: flex;
+	flex-direction: column;
+}
+
+.row {
+	display: flex;
+}
+
+.col {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 20px;
+	height: 20px;
+}
+
+.land {
+	color: #eee;
+}
+
+.mountain {
+	color: maroon;
+}
+
+.treasureSpot {
+	color: gold;
+}
+
+.top {}
+
+.right {
+	transform: rotate(90deg);
+}
+
+.bottom {
+	transform: rotate(180deg);
+}
+
+.left {
+	transform: rotate(-90deg);
+}
