@@ -1,8 +1,8 @@
 class Adventurer extends Coordinates {
-	constructor(x, y, o, name, moveSequence) {
+	constructor(name, x, y, o, moveSequence) {
 		super(x, y);
-		this.o = o;
 		this.name = name;
+		this.o = o;
 		this.moveSequence = moveSequence;
 		this.loot = 0;
 	}
@@ -79,7 +79,7 @@ class Adventurer extends Coordinates {
 		} else {
 			const canMove = this.isSquareFree(gameSet.board, this.y + 1, this.x);
 			if (!canMove) {
-				console.error(`Unable to move down  for ${this.name} (mountain or adventurer on the way).`);
+				console.error(`Unable to move down for ${this.name} (mountain or adventurer on the way).`);
 			} else {
 				this.markSquare(gameSet.board, this.y + 1, this.x);
 				this.y = this.y + 1;
