@@ -7,7 +7,7 @@ class Adventurer extends Coordinates {
 		this.loot = 0;
 	}
 	turnLeft() {
-		switch(this.o) {
+		switch (this.o) {
 			case 'N':
 				this.o = 'O';
 				break;
@@ -21,9 +21,10 @@ class Adventurer extends Coordinates {
 				this.o = 'S';
 				break;
 		}
+		this.deleteMoveFromSequence();
 	}
 	turnRight() {
-		switch(this.o) {
+		switch (this.o) {
 			case 'N':
 				this.o = 'E';
 				break;
@@ -37,85 +38,98 @@ class Adventurer extends Coordinates {
 				this.o = 'N';
 				break;
 		}
+		this.deleteMoveFromSequence();
 	}
 	moveUp(gameSet) {
-		const canMove = !gameSet.map.isOutOfBounds(this.x, this.y - 1) && gameSet.board[this.y - 1][this.x] !== 'M';
-		if (canMove) {
-			if (gameSet.board[this.y][this.x] === 'A') {
-				gameSet.board[this.y][this.x] = 'X'; // Only leave X if there was no treasure
-			}
-			// Check for treasure
-			if (gameSet.board[this.y - 1][this.x] > 0) {
-				this.loot++;
-				gameSet.board[this.y - 1][this.x]--;
-			} else if (gameSet.board[this.y - 1][this.x] !== 0) {
-				gameSet.board[this.y - 1][this.x] = 'A';
-			}
-			this.y = this.y - 1;
+		const isOutOfBounds = gameSet.map.isOutOfBounds(this.x, this.y - 1);
+		if (isOutOfBounds) {
+			console.error(`Unable to move up for ${this.name} (out of bounds).`);
 		} else {
-			console.error('Unable to move up.');
+			const canMove = this.isSquareFree(gameSet.board, this.y - 1, this.x);
+			if (!canMove) {
+				console.error(`Unable to move up for ${this.name} (mountain or adventurer on the way).`);
+			} else {
+				this.markSquare(gameSet.board, this.y - 1, this.x);
+				this.y = this.y - 1;
+			}
 		}
+		this.deleteMoveFromSequence();
 		return;
 	}
 	moveRight(gameSet) {
-		const canMove = !gameSet.map.isOutOfBounds(this.x + 1, this.y) && gameSet.board[this.y][this.x + 1] !== 'M';
-		if (canMove) {
-			if (gameSet.board[this.y][this.x] === 'A') {
-				gameSet.board[this.y][this.x] = 'X'; // Only leave X if there was no treasure
-			}
-			// Check for treasure
-			if (gameSet.board[this.y][this.x + 1] > 0) {
-				this.loot++;
-				gameSet.board[this.y][this.x + 1]--;
-			} else if (gameSet.board[this.y][this.x + 1] !== 0) {
-				gameSet.board[this.y][this.x + 1] = 'A';
-			}
-			this.x = this.x + 1;
+		const isOutOfBounds = gameSet.map.isOutOfBounds(this.x + 1, this.y);
+		if (isOutOfBounds) {
+			console.error(`Unable to move right for ${this.name} (out of bounds).`);
 		} else {
-			console.error('Unable to move right.');
+			const canMove = this.isSquareFree(gameSet.board, this.y, this.x + 1);
+			if (!canMove) {
+				console.error(`Unable to move right for ${this.name} (mountain or adventurer on the way).`);
+			} else {
+				this.markSquare(gameSet.board, this.y, this.x + 1);
+				this.x = this.x + 1;
+			}
 		}
+		this.deleteMoveFromSequence();
 		return;
 	}
 	moveDown(gameSet) {
-		const canMove = !gameSet.map.isOutOfBounds(this.x, this.y + 1) && gameSet.board[this.y + 1][this.x] !== 'M';
-		if (canMove) {
-			if (gameSet.board[this.y][this.x] === 'A') {
-				gameSet.board[this.y][this.x] = 'X'; // Only leave X if there was no treasure
-			}
-			// Check for treasure
-			if (gameSet.board[this.y + 1][this.x] > 0) {
-				this.loot++;
-				gameSet.board[this.y + 1][this.x]--;
-			} else if (gameSet.board[this.y + 1][this.x] !== 0) {
-				gameSet.board[this.y + 1][this.x] = 'A';
-			}
-			this.y = this.y + 1;
+		const isOutOfBounds = gameSet.map.isOutOfBounds(this.x, this.y + 1);
+		if (isOutOfBounds) {
+			console.error(`Unable to move down for ${this.name} (out of bounds).`);
 		} else {
-			console.error('Unable to move down.');
+			const canMove = this.isSquareFree(gameSet.board, this.y + 1, this.x);
+			if (!canMove) {
+				console.error(`Unable to move down  for ${this.name} (mountain or adventurer on the way).`);
+			} else {
+				this.markSquare(gameSet.board, this.y + 1, this.x);
+				this.y = this.y + 1;
+			}
 		}
+		this.deleteMoveFromSequence();
 		return;
 	}
 	moveLeft(gameSet) {
-		const canMove = !gameSet.map.isOutOfBounds(this.x - 1, this.y) && gameSet.board[this.y][this.x - 1] !== 'M';
-		if (canMove) {
-			if (gameSet.board[this.y][this.x] === 'A') {
-				gameSet.board[this.y][this.x] = 'X'; // Only leave X if there was no treasure
-			}
-			// Check for treasure
-			if (gameSet.board[this.y][this.x - 1] > 0) {
-				this.loot++;
-				gameSet.board[this.y][this.x - 1]--;
-			} else if (gameSet.board[this.y][this.x - 1] !== 0) {
-				gameSet.board[this.y][this.x - 1] = 'A';
-			}
-			this.x = this.x - 1;
+		const isOutOfBounds = gameSet.map.isOutOfBounds(this.x - 1, this.y);
+		if (isOutOfBounds) {
+			console.error(`Unable to move left for ${this.name} (out of bounds).`);
 		} else {
-			console.error('Unable to move left.');
+			const canMove = this.isSquareFree(gameSet.board, this.y, this.x - 1);
+			if (!canMove) {
+				console.error(`Unable to move left for ${this.name} (mountain or adventurer on the way).`);
+			} else {
+				this.markSquare(gameSet.board, this.y, this.x - 1);
+				this.x = this.x - 1;
+			}
 		}
+		this.deleteMoveFromSequence();
 		return;
 	}
-	// loot(gameSet, coordinates) {
-	// 	this.loot++; // Notify self
-	// 	newPosition--; // Notify game
-	// }
+	deleteMoveFromSequence() {
+		this.moveSequence = this.moveSequence.substring(1);
+	}
+	isSquareFree(board, row, col) {
+		const isOnAMountain = board[row][col] === 'M';
+		// TODO improve check for adventurer
+		const isEncounteringAnAdventurer =
+			typeof board[row][col] === 'string'
+			&& board[row][col] !== 'M'
+			&& board[row][col] !== 'X';
+		return !isOnAMountain && !isEncounteringAnAdventurer;
+	}
+	unmarkPreviousSquare(board) {
+		if (board[this.y][this.x] === this.name) {
+			board[this.y][this.x] = 'X'; // Only leave X if there was no treasure
+		}
+	}
+	markSquare(board, row, col) {
+		this.unmarkPreviousSquare(board);
+		if (board[row][col] > 0) {
+			// Treasure
+			this.loot++;
+			board[row][col]--;
+		} else if (board[row][col] !== 0) {
+			// Regular land
+			board[row][col] = this.name;
+		}
+	}
 }
