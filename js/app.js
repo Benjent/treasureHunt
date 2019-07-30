@@ -2,18 +2,24 @@ const app = new Vue({
   el: '#app',
   data: {
     gameSet: gameSet,
+		entryFile: null,
+		fileReader: new FileReader()
   },
 	mounted() {
 		// Initialize the board
 		this.initBoard();
-		this.startExploring();
+		// this.startExploring(); // Uncomment to launch game
 	},
 	methods: {
 		initBoard() {
 			this.gameSet.init();
 			this.$forceUpdate();
 		},
+		setGame() {
+			alert('tytyt')
+		},
 		startExploring() {
+			// alert('alors')
 			let hasAnyAdventurerMovesLeft = true;
 			while (hasAnyAdventurerMovesLeft) {
 				const currentAdventurer = this.gameSet.adventurers[this.gameSet.adventurerTurn];
@@ -55,7 +61,35 @@ const app = new Vue({
 					}
 				}
 			}
+			this.generateOutput();
+		},
+		generateOutput() {
 			console.log('fin du game')
+			let output = `C-${this.gameSet.map.width}-${this.gameSet.map.height}\n`;
+			for (let i = 0; i < this.gameSet.mountains.length; i++) {
+				let m = this.gameSet.mountains[i];
+				output = output.concat(`M-${m.x}-${m.y}\n`);
+			}
+			for (let i = 0; i < this.gameSet.treasureSpots.length; i++) {
+				let ts = this.gameSet.treasureSpots[i];
+				output = output.concat(`T-${ts.x}-${ts.y}-${ts.chestsNumber}\n`);
+			}
+			for (let i = 0; i < this.gameSet.adventurers.length; i++) {
+				let a = this.gameSet.adventurers[i];
+				output = output.concat(`A-${a.name}-${a.x}-${a.y}-${a.o}-${a.loot}\n`);
+			}
+			console.log(output);
+			this.triggerDownload('results.txt', output);
+		},
+		triggerDownload(filename, text) {
+			const el = document.createElement('a');
+			el.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(text)}`);
+			el.setAttribute('download', filename);
+
+			el.style.display = 'none';
+			document.body.appendChild(el);
+			el.click();
+			document.body.removeChild(el);
 		},
 		getAdventurerByName(name) {
 			for (let a = 0; a < this.gameSet.adventurers.length; a++) {
@@ -66,4 +100,3 @@ const app = new Vue({
 		}
 	}
 });
-
