@@ -7,27 +7,4 @@ const TS2 = new TreasureSpot(4, 5, 2);
 const A1 = new Adventurer(9, 9, 'N', 'Benjent', 'GAAADAAAAAAADADA');
 const A2 = new Adventurer(9, 2, 'N', 'Lara', 'DDAAAAADAA');
 const A3 = new Adventurer(3, 2, 'S', 'Indiana', 'AGADAADAA');
-// Start map
-// X X X X X X X X X X
-// X M X X X X X X X X
-// X X M X X X X X X X
-// X X X M X X X X X X
-// X X X X 1 X X X X X
-// X X X X X X X X X X
-// X X X X X X X X X X
-// X X X X X X X X X X
-// X X X X X X X X X X
-// X X X X X X X X X A
-
-// End map
-// X X X X X X X X X X
-// X M X X X X X X X X
-// X X M X X X X X X X
-// . . . M X X X X X X
-// . X . . . . . X X X
-// . X X X X X X X X X
-// . X X X X X X X X X
-// . X X X X X X X X X
-// . X X X X X X X X X
-// . . . . . . . . . .
 const gameSet = new GameSet(C, [M1, M2, M3], [TS1, TS2], [A1, A2, A3]);
