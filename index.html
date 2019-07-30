@@ -5,8 +5,8 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
-		<h1>Hellow</h1>
 		<div id="app">
+			<h1>Treasure hunt</h1>
 			<!-- <button :click="startExploring">Start exploring</button> -->
 			<div id="matrix">
 				<div class="row" v-for="row in gameSet.board">
@@ -15,10 +15,10 @@
 							land: col === 'X',
 							mountain: col === 'M',
 							treasureSpot: col > 0,
-							top: col === 'A' && gameSet.p.o === 'N',
-							right: col === 'A' && gameSet.p.o === 'E',
-							bottom: col === 'A' && gameSet.p.o === 'S',
-							left: col === 'A' && gameSet.p.o === 'O',
+							top: col !== 'X' && col !== 'M' && typeof col === 'string' && getAdventurerByName(col).o === 'N',
+							right: col !== 'X' && col !== 'M' && typeof col === 'string' && getAdventurerByName(col).o === 'E',
+							bottom: col !== 'X' && col !== 'M' && typeof col === 'string' && getAdventurerByName(col).o === 'S',
+							left: col !== 'X' && col !== 'M' && typeof col === 'string' && getAdventurerByName(col).o === 'O',
 						}">{{ col }}</div>
 					</div>
 					<br>

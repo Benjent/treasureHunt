@@ -3,9 +3,9 @@ class GameSet {
 		this.map = map;
 		this.mountains = mountains.splice(0);
 		this.treasureSpots = treasureSpots.splice(0);
-		// this.adventurers = adventurers.splice(0);
-		this.p = null;// focus on one player for now
+		this.adventurers = adventurers.splice(0);
 		this.board = [];
+		this.adventurerTurn = 0;
 	}
 	init() {
 		for (let y = 0; y < this.map.height; y++) {
@@ -26,13 +26,13 @@ class GameSet {
 						row[x] = this.treasureSpots[ts].chestsNumber;
 					}
 				}
+				// Set adventurers
+				for (let a = 0; a < this.adventurers.length; a++) {
+					if (this.adventurers[a].x === x && this.adventurers[a].y === y) {
+						row[x] = this.adventurers[a].name;
+					}
+				}
 			}
 		}
-		// TODO below is hard-coded, make it dynamic
-		// this.board[1][1] = 'M';
-		// this.board[2][2] = 'M';
-		// this.board[3][3] = 'M';
-		// this.board[4][4] = 2;
-		this.board[9][9] = 'A';
 	}
 }

@@ -1,3 +1,9 @@
+#app {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 #matrix {
 	display: flex;
 	flex-direction: column;
@@ -11,8 +17,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 20px;
-	height: 20px;
+	width: 50px;
+	height: 50px;
 }
 
 .land {
@@ -21,10 +27,12 @@
 
 .mountain {
 	color: maroon;
+	font-weight: bold;
 }
 
 .treasureSpot {
 	color: gold;
+	font-weight: bold;
 }
 
 .top {}

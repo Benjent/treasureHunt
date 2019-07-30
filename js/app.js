@@ -14,31 +14,54 @@ const app = new Vue({
 			this.$forceUpdate();
 		},
 		startExploring() {
-			for (let i = 0; i < this.gameSet.p.moveSequence.length; i++) {
-				let action = this.gameSet.p.moveSequence[i];
-				switch(action) {
+			let hasAnyAdventurerMovesLeft = true;
+			while (hasAnyAdventurerMovesLeft) {
+				const currentAdventurer = this.gameSet.adventurers[this.gameSet.adventurerTurn];
+				let action = currentAdventurer.moveSequence.charAt(0);
+				switch (action) {
 					case 'A':
-						if (this.gameSet.p.o === 'N') {
-							this.gameSet.p.moveUp(this.gameSet);
-						} else if (this.gameSet.p.o === 'E') {
-							this.gameSet.p.moveRight(this.gameSet);
-						} else if (this.gameSet.p.o === 'S') {
-							this.gameSet.p.moveDown(this.gameSet);
-						} else if (this.gameSet.p.o === 'O') {
-							this.gameSet.p.moveLeft(this.gameSet);
+						if (currentAdventurer.o === 'N') {
+							currentAdventurer.moveUp(this.gameSet);
+						} else if (currentAdventurer.o === 'E') {
+							currentAdventurer.moveRight(this.gameSet);
+						} else if (currentAdventurer.o === 'S') {
+							currentAdventurer.moveDown(this.gameSet);
+						} else if (currentAdventurer.o === 'O') {
+							currentAdventurer.moveLeft(this.gameSet);
 						} else {
 							console.error('Unable to set direction to move to.');
 						}
 						break;
 					case 'D':
-						this.gameSet.p.turnRight();
+						currentAdventurer.turnRight();
 						break;
 					case 'G':
-						this.gameSet.p.turnLeft();
+						currentAdventurer.turnLeft();
 						break;
 				}
-				console.log(action);
+				// Reset the turn
+				if (this.gameSet.adventurerTurn === this.gameSet.adventurers.length - 1) {
+					this.gameSet.adventurerTurn = 0;
+				} else {
+					this.gameSet.adventurerTurn++;
+				}
 				this.$forceUpdate();
+				// Check if adventurer moves are left
+				hasAnyAdventurerMovesLeft = false;
+				for (let a = 0; a < this.gameSet.adventurers.length; a++) {
+					if (this.gameSet.adventurers[a].moveSequence.length > 0) {
+						hasAnyAdventurerMovesLeft = true;
+						break;
+					}
+				}
+			}
+			console.log('fin du game')
+		},
+		getAdventurerByName(name) {
+			for (let a = 0; a < this.gameSet.adventurers.length; a++) {
+				if (this.gameSet.adventurers[a].name === name) {
+					return this.gameSet.adventurers[a];
+				}
 			}
 		}
 	}
