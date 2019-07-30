@@ -61,6 +61,9 @@ const app = new Vue({
 					}
 				}
 			}
+			this.generateOutput();
+		},
+		generateOutput() {
 			console.log('fin du game')
 			let output = `C-${this.gameSet.map.width}-${this.gameSet.map.height}\n`;
 			for (let i = 0; i < this.gameSet.mountains.length; i++) {
@@ -73,9 +76,20 @@ const app = new Vue({
 			}
 			for (let i = 0; i < this.gameSet.adventurers.length; i++) {
 				let a = this.gameSet.adventurers[i];
-				output = output.concat(`A-${a.name}-${a.x}-${a.y}-${a.o}-${a.y}-${a.loot}\n`);
+				output = output.concat(`A-${a.name}-${a.x}-${a.y}-${a.o}-${a.loot}\n`);
 			}
 			console.log(output);
+			this.triggerDownload('results.txt', output);
+		},
+		triggerDownload(filename, text) {
+			const el = document.createElement('a');
+			el.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(text)}`);
+			el.setAttribute('download', filename);
+
+			el.style.display = 'none';
+			document.body.appendChild(el);
+			el.click();
+			document.body.removeChild(el);
 		},
 		getAdventurerByName(name) {
 			for (let a = 0; a < this.gameSet.adventurers.length; a++) {
