@@ -7,8 +7,9 @@
 	<body>
 		<div id="app">
 			<h1>Treasure hunt</h1>
-			<file-uploader @gameset="startExploring"></file-uploader>
-			<div id="matrix">
+			<file-uploader @gameset="initBoard"></file-uploader>
+			<button @click="startExploring" v-if="gameSet">Start exploring!</button>
+			<div id="matrix" v-if="gameSet">
 				<div class="row" v-for="row in gameSet.board">
 					<div class="col" v-for="col in row">
 						<div :class="{
@@ -33,16 +34,11 @@
 		<script src="js/enum/action.js"></script>
 		<!-- Model -->
 		<script src="js/model/abstract/coordinates.js"></script>
-		<script src="js/model/map.js"></script>
+		<script src="js/model/madre-de-dios-map.js"></script>
 		<script src="js/model/mountain.js"></script>
 		<script src="js/model/treasure-spot.js"></script>
 		<script src="js/model/adventurer.js"></script>
 		<script src="js/model/game-set.js"></script>
-		<!-- Service -->
-		<script src="js/service/file-reader.js"></script>
-		<!-- Set -->
-		<!-- Uncomment the set you want to use -->
-		<script src="js/set/set1.js"></script>
 		<!-- Component -->
 		<script src="js/component/file-uploader.js"></script>
 		<!-- App -->
