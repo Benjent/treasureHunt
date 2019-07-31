@@ -1,41 +1,56 @@
+/**
+ * Component that handles the file upload and the gameSet generation from the file.
+ */
 Vue.component('fileUploader', {
 	template: `
 		<div>
 			<input type="file" id="input-file" @change="getFile">
 		</div>
 	`,
-	data() {
-		return {
-
-		}
-	},
+	data() {},
 	methods: {
+		/**
+		 * Retrieve the file from the input.
+		 * Then read the file content and trigger the gameSet generation.
+		 * @param {object} event - The event from the input change.
+		 */
 		getFile(event) {
-			const input = event.target
+			const input = event.target;
+
 			if ('files' in input && input.files.length > 0) {
 				const file = input.files[0];
+
 				readFileContent(file).then(content => {
 					this.generateSet(content)
-				}).catch(error => console.log(error))
+				}).catch(error => console.log(error));
 			}
 		},
+		/**
+		 * Generate the gameSet according to the data of the entry file by extracting data line by line.
+		 * @param {string} content - The data of the entry file.
+		 */
 		generateSet(content) {
+			// Split game data line by line
 			const parsedContent = content.split('\n');
+
 			if (parsedContent) {
 				let map = null;
 				const mountains = [];
 				const treasureSpots = [];
 				const adventurers = [];
+
 				for (let i = 0; i < parsedContent.length; i++) {
 					let line = parsedContent[i];
+
 					if (line.charAt(0) !== '#') {
 						line = line.replace(/\s+/g, '');
 						const array = line.split('-');
-						console.log(array);
+
+						// The first character of the line determines the model
 						const modelDeterminer = array[0];
 						switch (modelDeterminer) {
 							case 'C':
-								map = new Map(array[1], array[2]);
+								map = new MadreDeDiosMap(array[1], array[2]);
 								break;
 							case 'M':
 								mountains.push(new Mountain(array[1], array[2]));
@@ -45,6 +60,9 @@ Vue.component('fileUploader', {
 								break;
 							case 'A':
 								adventurers.push(new Adventurer(array[1], array[2], array[3], array[4], array[5]));
+								break;
+							default:
+								console.error(`Unable to create model off line ${++i} of the entry file.`);
 								break;
 						}
 					}
@@ -69,6 +87,7 @@ Vue.component('fileUploader', {
 //   }
 // }
 
+// TODO make it vue.js
 function readFileContent(file) {
 	const reader = new FileReader()
   return new Promise((resolve, reject) => {
