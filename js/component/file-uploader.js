@@ -4,7 +4,7 @@
 Vue.component('fileUploader', {
 	template: `
 		<div>
-			<input type="file" id="input-file" @change="getFile">
+			<input type="file" id="inputFile" @change="getFile">
 		</div>
 	`,
 	methods: {
