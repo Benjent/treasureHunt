@@ -1,11 +1,11 @@
-// TODO Use Object.hasOwnProperty() to check
 /**
  * Enum representing the values that the first character of a line of the entry file can hold.
+ * The "X" entry is only for visual purpose, it is not a model per say.
  */
 const MODEL = {
-	A: null, // Adventurer
-	C: null, // Map
-	M: null, // Mountain
-	T: null, // Treasure spot
+	A: 'A', // Adventurer
+	C: 'C', // Map
+	M: 'M', // Mountain
+	T: 'T', // Treasure spot
 }
 Object.freeze(MODEL);

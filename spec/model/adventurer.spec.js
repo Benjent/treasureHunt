@@ -2,31 +2,31 @@ describe('Testing class "Adventurer"', () => {
 	const C = new MadreDeDiosMap(3, 3);
 
 	it('should set the correct orientation when turning left', () => {
-		const adventurer = new Adventurer('Champion', 4, 4, 'N', 'AAA');
+		const adventurer = new Adventurer('Champion', 4, 4, ORIENTATION.N, 'AAA');
 		adventurer.turnLeft();
-		expect(adventurer.o).toEqual('O');
+		expect(adventurer.o).toEqual(ORIENTATION.O);
 		adventurer.turnLeft();
-		expect(adventurer.o).toEqual('S');
+		expect(adventurer.o).toEqual(ORIENTATION.S);
 		adventurer.turnLeft();
-		expect(adventurer.o).toEqual('E');
+		expect(adventurer.o).toEqual(ORIENTATION.E);
 		adventurer.turnLeft();
-		expect(adventurer.o).toEqual('N');
+		expect(adventurer.o).toEqual(ORIENTATION.N);
 	})
 
 	it('should set the correct orientation when turning right', () => {
-		const adventurer = new Adventurer('Champion', 4, 4, 'S', 'AAA');
+		const adventurer = new Adventurer('Champion', 4, 4, ORIENTATION.S, 'AAA');
 		adventurer.turnRight();
-		expect(adventurer.o).toEqual('O');
+		expect(adventurer.o).toEqual(ORIENTATION.O);
 		adventurer.turnRight();
-		expect(adventurer.o).toEqual('N');
+		expect(adventurer.o).toEqual(ORIENTATION.N);
 		adventurer.turnRight();
-		expect(adventurer.o).toEqual('E');
+		expect(adventurer.o).toEqual(ORIENTATION.E);
 		adventurer.turnRight();
-		expect(adventurer.o).toEqual('S');
+		expect(adventurer.o).toEqual(ORIENTATION.S);
 	})
 
 	it('should remove the root action from the move sequence when it is performed', () => {
-		const adventurer = new Adventurer('Champion', 4, 4, 'S', 'ADAGA');
+		const adventurer = new Adventurer('Champion', 4, 4, ORIENTATION.S, 'ADAGA');
 		adventurer.deleteMoveFromSequence();
 		expect(adventurer.moveSequence).toEqual('DAGA');
 	})
@@ -39,7 +39,7 @@ describe('Testing class "Adventurer"', () => {
 		beforeEach(() => {
 			M = new Mountain(0, 0);
 			TS = new TreasureSpot(0, 1, 1);
-			A = new Adventurer('Benjent', 1, 1, 'N', 'AAA');
+			A = new Adventurer('Benjent', 1, 1, ORIENTATION.N, 'AAA');
 			gameSet = new GameSet(C, [M], [TS], [A]);
 		})
 

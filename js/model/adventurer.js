@@ -25,17 +25,17 @@ class Adventurer extends Coordinates {
 	 */
 	turnLeft() {
 		switch (this.o) {
-			case 'N':
-				this.o = 'O';
+			case ORIENTATION.N:
+				this.o = ORIENTATION.O;
 				break;
-			case 'E':
-				this.o = 'N';
+			case ORIENTATION.E:
+				this.o = ORIENTATION.N;
 				break;
-			case 'S':
-				this.o = 'E';
+			case ORIENTATION.S:
+				this.o = ORIENTATION.E;
 				break;
-			case 'O':
-				this.o = 'S';
+			case ORIENTATION.O:
+				this.o = ORIENTATION.S;
 				break;
 		}
 		this.deleteMoveFromSequence();
@@ -46,17 +46,17 @@ class Adventurer extends Coordinates {
 	 */
 	turnRight() {
 		switch (this.o) {
-			case 'N':
-				this.o = 'E';
+			case ORIENTATION.N:
+				this.o = ORIENTATION.E;
 				break;
-			case 'E':
-				this.o = 'S';
+			case ORIENTATION.E:
+				this.o = ORIENTATION.S;
 				break;
-			case 'S':
-				this.o = 'O';
+			case ORIENTATION.S:
+				this.o = ORIENTATION.O;
 				break;
-			case 'O':
-				this.o = 'N';
+			case ORIENTATION.O:
+				this.o = ORIENTATION.N;
 				break;
 		}
 		this.deleteMoveFromSequence();
@@ -156,8 +156,8 @@ class Adventurer extends Coordinates {
 	 */
 	isSquareFree(board, row, col) {
 		const square = board[row][col];
-		const isOnAMountain = square === 'M';
-		const isEncounteringAnAdventurer = typeof square === 'string' && square !== 'M' && square !== 'X';
+		const isOnAMountain = square === SQUARE.M;
+		const isEncounteringAnAdventurer = typeof square === 'string' && square !== SQUARE.M && square !== SQUARE.X;
 		return !isOnAMountain && !isEncounteringAnAdventurer;
 	}
 	/**
@@ -167,7 +167,7 @@ class Adventurer extends Coordinates {
 	unmarkPreviousSquare(board) {
 		// If the square holds a name, it is not a treasure spot
 		if (board[this.y][this.x] === this.name) {
-			board[this.y][this.x] = 'X';
+			board[this.y][this.x] = SQUARE.X;
 		}
 	}
 	/**

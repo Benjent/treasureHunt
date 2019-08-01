@@ -48,16 +48,16 @@ Vue.component('fileUploader', {
 						// The first character of the line determines the model
 						const modelDeterminer = array[0];
 						switch (modelDeterminer) {
-							case 'C':
+							case MODEL.C:
 								map = new MadreDeDiosMap(array[1], array[2]);
 								break;
-							case 'M':
+							case MODEL.M:
 								mountains.push(new Mountain(array[1], array[2]));
 								break;
-							case 'T':
+							case MODEL.T:
 								treasureSpots.push(new TreasureSpot(array[1], array[2], array[3]));
 								break;
-							case 'A':
+							case MODEL.A:
 								adventurers.push(new Adventurer(array[1], array[2], array[3], array[4], array[5]));
 								break;
 							default:
