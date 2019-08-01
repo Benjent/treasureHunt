@@ -7,7 +7,6 @@ Vue.component('fileUploader', {
 			<input type="file" id="input-file" @change="getFile">
 		</div>
 	`,
-	data() {},
 	methods: {
 		/**
 		 * Retrieve the file from the input.
