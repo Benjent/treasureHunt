@@ -7,7 +7,6 @@ Vue.component('fileUploader', {
 			<input type="file" id="input-file" @change="getFile">
 		</div>
 	`,
-	data() {},
 	methods: {
 		/**
 		 * Retrieve the file from the input.
@@ -49,16 +48,16 @@ Vue.component('fileUploader', {
 						// The first character of the line determines the model
 						const modelDeterminer = array[0];
 						switch (modelDeterminer) {
-							case 'C':
+							case MODEL.C:
 								map = new MadreDeDiosMap(array[1], array[2]);
 								break;
-							case 'M':
+							case MODEL.M:
 								mountains.push(new Mountain(array[1], array[2]));
 								break;
-							case 'T':
+							case MODEL.T:
 								treasureSpots.push(new TreasureSpot(array[1], array[2], array[3]));
 								break;
-							case 'A':
+							case MODEL.A:
 								adventurers.push(new Adventurer(array[1], array[2], array[3], array[4], array[5]));
 								break;
 							default:
@@ -73,19 +72,6 @@ Vue.component('fileUploader', {
 		}
 	}
 })
-
-// TODO
-// function getFile(event) {
-// 	const input = event.target
-//   if ('files' in input && input.files.length > 0) {
-// 	  // placeFileContent(document.getElementById('content-target'), input.files[0])
-// 		const file = input.files[0];
-// 		readFileContent(file).then(content => {
-// 			console.log(content)
-// 			console.log(typeof content)
-// 		}).catch(error => console.log(error))
-//   }
-// }
 
 // TODO make it vue.js
 function readFileContent(file) {

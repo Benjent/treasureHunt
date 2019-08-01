@@ -29,27 +29,27 @@ const app = new Vue({
 
 				let action = currentAdventurer.moveSequence.charAt(0);
 				switch (action) {
-					case 'A':
-						if (currentAdventurer.o === 'N') {
+					case ACTION.A:
+						if (currentAdventurer.o === ORIENTATION.N) {
 							currentAdventurer.moveUp(this.gameSet);
-						} else if (currentAdventurer.o === 'E') {
+						} else if (currentAdventurer.o === ORIENTATION.E) {
 							currentAdventurer.moveRight(this.gameSet);
-						} else if (currentAdventurer.o === 'S') {
+						} else if (currentAdventurer.o === ORIENTATION.S) {
 							currentAdventurer.moveDown(this.gameSet);
-						} else if (currentAdventurer.o === 'O') {
+						} else if (currentAdventurer.o === ORIENTATION.O) {
 							currentAdventurer.moveLeft(this.gameSet);
 						} else {
 							console.error('Unable to set direction to move to.');
 						}
 						break;
-					case 'D':
+					case ACTION.D:
 						currentAdventurer.turnRight();
 						break;
-					case 'G':
+					case ACTION.G:
 						currentAdventurer.turnLeft();
 						break;
 					default:
-						console.error('Unknown action to perform.');
+						console.error(`Unknown action to perform for ${currentAdventurer.name}.`);
 						break;
 				}
 
@@ -79,24 +79,24 @@ const app = new Vue({
 		 */
 		generateOutput() {
 			// Build map line
-			let output = `C-${this.gameSet.map.width}-${this.gameSet.map.height}\n`;
+			let output = `${MODEL.C}-${this.gameSet.map.width}-${this.gameSet.map.height}\n`;
 
 			// Build mountain lines
 			for (let i = 0; i < this.gameSet.mountains.length; i++) {
 				let m = this.gameSet.mountains[i];
-				output = output.concat(`M-${m.x}-${m.y}\n`);
+				output = output.concat(`${MODEL.M}-${m.x}-${m.y}\n`);
 			}
 
 			// Build treasure spot lines
 			for (let i = 0; i < this.gameSet.treasureSpots.length; i++) {
 				let ts = this.gameSet.treasureSpots[i];
-				output = output.concat(`T-${ts.x}-${ts.y}-${ts.chestsNumber}\n`);
+				output = output.concat(`${MODEL.T}-${ts.x}-${ts.y}-${ts.chestsNumber}\n`);
 			}
 
 			// Build adventurer lines
 			for (let i = 0; i < this.gameSet.adventurers.length; i++) {
 				let a = this.gameSet.adventurers[i];
-				output = output.concat(`A-${a.name}-${a.x}-${a.y}-${a.o}-${a.loot}\n`);
+				output = output.concat(`${MODEL.A}-${a.name}-${a.x}-${a.y}-${a.o}-${a.loot}\n`);
 			}
 
 			this.triggerDownload('results.txt', output);

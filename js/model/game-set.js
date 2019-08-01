@@ -29,12 +29,12 @@ class GameSet {
 				const row = this.board[y];
 
 				// Set land by default
-				row[x] = 'X';
+				row[x] = SQUARE.X;
 
 				// Set mountains
 				for (let m = 0; m < this.mountains.length; m++) {
 					if (this.mountains[m].x === x && this.mountains[m].y === y) {
-						row[x] = 'M';
+						row[x] = SQUARE.M;
 					}
 				}
 
