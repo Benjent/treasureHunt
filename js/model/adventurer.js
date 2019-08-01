@@ -11,6 +11,8 @@ class Adventurer extends Coordinates {
 	 * @param {number} y - The vertical axis coordinate.
 	 * @param {string} o - The orientation of the adventurer.
 	 * @param {string} moveSequence - The sequence of moves of the adventurer throughout the map exploration.
+	 * @throws Will throw an error if the given orientation does not match one of the possibilities.
+	 * @throws Will throw an error if one action does not match one of the possibilities.
 	 */
 	constructor(name, x, y, o, moveSequence) {
 		super(x, y);

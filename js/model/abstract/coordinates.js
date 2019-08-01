@@ -5,6 +5,7 @@ class Coordinates {
 	 * @constructor
 	 * @param {number} x - The horizontal axis coordinate.
 	 * @param {number} y - The vertical axis coordinate.
+	 * @throws Will throw an error if directly instanciated
 	 */
 	constructor(x, y) {
 		// Abstract class check
