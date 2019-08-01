@@ -1,6 +1,20 @@
 describe('Testing class "Adventurer"', () => {
 	const C = new MadreDeDiosMap(3, 3);
 
+	it('should throw an error trying to instantiate (wrong orientation)', () => {
+		function createAdventurer() {
+			new Adventurer('Champion', 1, 1, 'F', 'AAA');
+		}
+		expect(createAdventurer).toThrow(new TypeError('Class "Adventurer" cannot be instanciated with unknown orientation.'));
+	})
+
+	it('should throw an error trying to instantiate (wrong action in move sequence)', () => {
+		function createAdventurer() {
+			new Adventurer('Champion', 1, 1, 'N', 'ABC');
+		}
+		expect(createAdventurer).toThrow(new TypeError('Class "Adventurer" cannot be instanciated with unknown moves.'));
+	})
+
 	it('should set the correct orientation when turning left', () => {
 		const adventurer = new Adventurer('Champion', 4, 4, ORIENTATION.N, 'AAA');
 		adventurer.turnLeft();

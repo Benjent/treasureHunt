@@ -18,6 +18,17 @@ class Adventurer extends Coordinates {
 		this.o = o;
 		this.moveSequence = moveSequence;
 		this.loot = 0;
+
+		if (!ORIENTATION.hasOwnProperty(o)) {
+			throw new TypeError('Class "Adventurer" cannot be instanciated with unknown orientation.');
+		}
+
+		for (let i = 0; i < this.moveSequence.length; i++) {
+			const char = this.moveSequence[i];
+			if (!ACTION.hasOwnProperty(char)) {
+				throw new TypeError('Class "Adventurer" cannot be instanciated with unknown moves.');
+			}
+		}
 	}
 	/**
 	 * Set the orientation of the adventurer to the next cardinal direction counter-clockwise.

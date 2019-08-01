@@ -28,6 +28,8 @@ const app = new Vue({
 				const currentAdventurer = this.gameSet.adventurers[this.gameSet.adventurerTurn];
 
 				let action = currentAdventurer.moveSequence.charAt(0);
+				console.log(ACTION.A)
+				console.log(action)
 				switch (action) {
 					case ACTION.A:
 						if (currentAdventurer.o === ORIENTATION.N) {
@@ -49,7 +51,7 @@ const app = new Vue({
 						currentAdventurer.turnLeft();
 						break;
 					default:
-						console.error('Unknown action to perform.');
+						console.error(`Unknown action to perform for ${currentAdventurer.name}.`);
 						break;
 				}
 

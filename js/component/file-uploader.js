@@ -73,19 +73,6 @@ Vue.component('fileUploader', {
 	}
 })
 
-// TODO
-// function getFile(event) {
-// 	const input = event.target
-//   if ('files' in input && input.files.length > 0) {
-// 	  // placeFileContent(document.getElementById('content-target'), input.files[0])
-// 		const file = input.files[0];
-// 		readFileContent(file).then(content => {
-// 			console.log(content)
-// 			console.log(typeof content)
-// 		}).catch(error => console.log(error))
-//   }
-// }
-
 // TODO make it vue.js
 function readFileContent(file) {
 	const reader = new FileReader()

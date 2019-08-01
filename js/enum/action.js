@@ -1,4 +1,3 @@
-// TODO remove this comment Use Object.hasOwnProperty() to check
 /**
  * Enum representing the values that an adventurer move can hold.
  */

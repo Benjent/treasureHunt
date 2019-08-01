@@ -1,4 +1,3 @@
-// TODO blabla Use Object.hasOwnProperty() to check
 /**
  * Enum representing the values that an adventurer orientation can hold.
  */
