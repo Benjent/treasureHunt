@@ -28,8 +28,6 @@ const app = new Vue({
 				const currentAdventurer = this.gameSet.adventurers[this.gameSet.adventurerTurn];
 
 				let action = currentAdventurer.moveSequence.charAt(0);
-				console.log(ACTION.A)
-				console.log(action)
 				switch (action) {
 					case ACTION.A:
 						if (currentAdventurer.o === ORIENTATION.N) {
