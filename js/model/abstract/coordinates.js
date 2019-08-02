@@ -10,9 +10,20 @@ class Coordinates {
 	constructor(x, y) {
 		// Abstract class check
 		if (this.constructor === Coordinates) {
-			throw new TypeError('Abstract class "Coordinates" cannot be instanciated.');
+			throw new TypeError('Abstract class "Coordinates" cannot be directly instanciated.');
 		}
-		this.x = parseInt(x, 10);
-		this.y = parseInt(y, 10);
+
+		if (isNil(x) || isNil(y)) {
+			throw new TypeError('Abstract class "Coordinates" cannot be instanciated with nil properties.');
+		}
+
+		const parsedX = parseInt(x, 10);
+		const parsedY = parseInt(y, 10);
+		if (isNaN(parsedX) || isNaN(parsedY) || parsedX < 0 || parsedY < 0) {
+			throw new TypeError('Abstract class "Coordinates" coordinates must be positive.');
+		}
+		
+		this.x = parsedX;
+		this.y = parsedY;
 	}
 }

@@ -11,6 +11,10 @@ class GameSet {
 	 * @param {Array} adventurers - The list of the adventurers exploring the map.
 	 */
 	constructor(map, mountains, treasureSpots, adventurers) {
+		if (isNil(map) || isNil(mountains) || isNil(treasureSpots) || isNil(adventurers)) {
+			throw new TypeError('Class "GameSet" cannot be instanciated with nil properties.');
+		}
+
 		this.map = map;
 		this.mountains = mountains.splice(0);
 		this.treasureSpots = treasureSpots.splice(0);

@@ -1,6 +1,36 @@
 describe('Testing class "Adventurer"', () => {
 	const C = new MadreDeDiosMap(3, 3);
 
+	it('should throw an error trying to instantiate (nil params)', () => {
+		function ca1() {
+			new Adventurer('', 1, 1, ORIENTATION.N, 'AAA');
+		}
+		function ca2() {
+			new Adventurer('Champion', null, 1, ORIENTATION.N, 'AAA');
+		}
+		function ca3() {
+			new Adventurer('Champion', 1, '', ORIENTATION.N, 'AAA');
+		}
+		function ca4() {
+			new Adventurer('Champion', 1, 1, undefined, 'AAA');
+		}
+		function ca5() {
+			new Adventurer('Champion', 1, 1, undefined, '');
+		}
+		expect(ca1).toThrow(new TypeError('Class "Adventurer" cannot be instanciated with nil properties.'));
+		expect(ca2).toThrow(new TypeError('Abstract class "Coordinates" cannot be instanciated with nil properties.'));
+		expect(ca3).toThrow(new TypeError('Abstract class "Coordinates" cannot be instanciated with nil properties.'));
+		expect(ca4).toThrow(new TypeError('Class "Adventurer" cannot be instanciated with nil properties.'));
+		expect(ca5).toThrow(new TypeError('Class "Adventurer" cannot be instanciated with nil properties.'));
+	})
+
+	it('should throw an error trying to instantiate (wrong coordinates)', () => {
+		function createAdventurer() {
+			new Adventurer('Champion', -1, '-1', 'F', 'AAA');
+		}
+		expect(createAdventurer).toThrow(new TypeError('Abstract class "Coordinates" coordinates must be positive.'));
+	})
+
 	it('should throw an error trying to instantiate (wrong orientation)', () => {
 		function createAdventurer() {
 			new Adventurer('Champion', 1, 1, 'F', 'AAA');
@@ -10,7 +40,7 @@ describe('Testing class "Adventurer"', () => {
 
 	it('should throw an error trying to instantiate (wrong action in move sequence)', () => {
 		function createAdventurer() {
-			new Adventurer('Champion', 1, 1, 'N', 'ABC');
+			new Adventurer('Champion', 1, 1, ORIENTATION.N, 'ABC');
 		}
 		expect(createAdventurer).toThrow(new TypeError('Class "Adventurer" cannot be instanciated with unknown moves.'));
 	})

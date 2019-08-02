@@ -16,21 +16,26 @@ class Adventurer extends Coordinates {
 	 */
 	constructor(name, x, y, o, moveSequence) {
 		super(x, y);
-		this.name = name;
-		this.o = o;
-		this.moveSequence = moveSequence;
-		this.loot = 0;
+
+		if (isNil(name) || isNil(o) || isNil(moveSequence)) {
+			throw new TypeError('Class "Adventurer" cannot be instanciated with nil properties.');
+		}
 
 		if (!ORIENTATION.hasOwnProperty(o)) {
 			throw new TypeError('Class "Adventurer" cannot be instanciated with unknown orientation.');
 		}
 
-		for (let i = 0; i < this.moveSequence.length; i++) {
-			const char = this.moveSequence[i];
+		for (let i = 0; i < moveSequence.length; i++) {
+			const char = moveSequence[i];
 			if (!ACTION.hasOwnProperty(char)) {
 				throw new TypeError('Class "Adventurer" cannot be instanciated with unknown moves.');
 			}
 		}
+
+		this.name = name;
+		this.o = o;
+		this.moveSequence = moveSequence;
+		this.loot = 0;
 	}
 	/**
 	 * Set the orientation of the adventurer to the next cardinal direction counter-clockwise.
