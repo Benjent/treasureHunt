@@ -12,6 +12,15 @@ class TreasureSpot extends Coordinates {
 	 */
 	constructor(x, y, n) {
 		super(x, y);
-		this.chestsNumber = parseInt(n, 10);
+
+		if (isNil(n)) {
+			throw new TypeError('Class "TreasureSpot" cannot be instanciated with nil properties.');
+		}
+		
+		const parsedN = parseInt(n, 10);
+		if (parsedN < 0) {
+			throw new TypeError('Class "TreasureSpot" chests number must be positive.');
+		}
+		this.chestsNumber = parsedN;
 	}
 }

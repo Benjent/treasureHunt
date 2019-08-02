@@ -7,8 +7,20 @@ class MadreDeDiosMap {
 	 * @param {number} height - The height of the map (number of squares).
 	 */
 	constructor(width, height) {
-		this.width = parseInt(width, 10);
-		this.height = parseInt(height, 10);
+
+		if (isNil(width) || isNil(height)) {
+			console.log(isNil(width));
+			throw new TypeError('Class "MadreDeDiosMap" cannot be instanciated with nil properties.');
+		}
+
+		const parsedWidth = parseInt(width, 10);
+		const parsedHeight = parseInt(height, 10);
+
+		if (parsedWidth < 0 || parsedHeight < 0) {
+			throw new TypeError('Class "MadreDeDiosMap" width and height must be positive.');
+		}
+		this.width = parsedWidth;
+		this.height = parsedHeight;
 	}
 	/**
 	 * Tell if the given coordinates are out of the map boundaries.

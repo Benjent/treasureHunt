@@ -4,6 +4,25 @@ describe('Testing class "GameSet"', () => {
 	const TS = new TreasureSpot(0, 1, 1);
 	const A = new Adventurer('Benjent', 1, 1, ORIENTATION.N, 'AAA');
 
+	it('should throw an error trying to instantiate (nil params)', () => {
+		function c1() {
+			new GameSet(null, [M], [TS], [A]); 
+		}
+		function c2() {
+			new GameSet(C, undefined, [TS], [A]); 
+		}
+		function c3() {
+			new GameSet(C, [M], '', [A]); 
+		}
+		function c4() {
+			new GameSet(C, [M], [], null); 
+		}
+		expect(c1).toThrow(new TypeError('Class "GameSet" cannot be instanciated with nil properties.'));
+		expect(c2).toThrow(new TypeError('Class "GameSet" cannot be instanciated with nil properties.'));
+		expect(c3).toThrow(new TypeError('Class "GameSet" cannot be instanciated with nil properties.'));
+		expect(c4).toThrow(new TypeError('Class "GameSet" cannot be instanciated with nil properties.'));
+	})
+
 	it('should set the correct squares letters and grid according to the given data', () => {
 		const gameSet = new GameSet(C, [M], [TS], [A]); 
 		gameSet.init();
