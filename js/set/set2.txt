@@ -1,0 +1,11 @@
+# This is a comment, thus it must be ignored
+C-10-10
+M-1-1
+M - 2 - 2
+M-3-3
+# Ignore that as well
+T-4-4-1
+T - 4 - 5 - 2
+A-Benjent-9-9 - N - GAAADAAAAAAADADA
+A-Lara - 9-2 - N-DDAAAAADAAAAADAAAAA
+A-Indiana-3-2-S-AGADAADAA

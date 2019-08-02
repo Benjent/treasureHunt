@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div id="app">
+			<h1>Treasure hunt</h1>
+			<file-uploader @gameset="initBoard"></file-uploader>
+			<button @click="startExploring" v-if="gameSet">Start exploring!</button>
+			<div id="matrix" v-if="gameSet">
+				<div class="row" v-for="row in gameSet.board">
+					<div class="col" v-for="col in row">
+						<div :class="{
+							land: col === 'X',
+							mountain: col === 'M',
+							treasureSpot: col > 0,
+							top: col !== 'X' && col !== 'M' && typeof col === 'string' && getAdventurerByName(col).o === 'N',
+							right: col !== 'X' && col !== 'M' && typeof col === 'string' && getAdventurerByName(col).o === 'E',
+							bottom: col !== 'X' && col !== 'M' && typeof col === 'string' && getAdventurerByName(col).o === 'S',
+							left: col !== 'X' && col !== 'M' && typeof col === 'string' && getAdventurerByName(col).o === 'O',
+						}">{{ col }}</div>
+					</div>
+					<br>
+				</div>
+			</div>
+		</div>
+		<!-- Lib -->
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<!-- Enum -->
+		<script src="js/enum/model.js"></script>
+		<script src="js/enum/orientation.js"></script>
+		<script src="js/enum/action.js"></script>
+		<script src="js/enum/square.js"></script>
+		<!-- Util -->
+		<script src="js/util/type-checker.js"></script>
+		<script src="js/util/file-reader.js"></script>
+		<!-- Model -->
+		<script src="js/model/abstract/coordinates.js"></script>
+		<script src="js/model/madre-de-dios-map.js"></script>
+		<script src="js/model/mountain.js"></script>
+		<script src="js/model/treasure-spot.js"></script>
+		<script src="js/model/adventurer.js"></script>
+		<script src="js/model/game-set.js"></script>
+		<!-- Component -->
+		<script src="js/component/file-uploader.js"></script>
+		<!-- App -->
+		<script src="js/app.js"></script>
+	</body>
+</html>
